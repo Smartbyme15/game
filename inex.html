@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Funny Game 😈</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #0f0f0f;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .box {
+        width: 90%;
+        max-width: 400px;
+        padding: 20px;
+        animation: fade 1s ease;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button {
+        padding: 12px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .start {
+        background: hotpink;
+        color: white;
+        animation: pulse 1.5s infinite;
+    }
+
+    .opt {
+        background: #222;
+        color: white;
+    }
+
+    .cry {
+        font-size: 30px;
+        animation: shake 0.5s infinite;
+    }
+
+    #noBtn {
+        position: absolute;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes fade {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+</style>
+</head>
+<body>
+
+<div class="box" id="game"></div>
+
+<script>
+const game = document.getElementById("game");
+
+let questions = [
+    {
+        q: "ager laiba ka accident ho jae to tum kya karo gi 😮",
+        o1: "use esa hi chor kar chali jao gi 🚗💨",
+        o2: "marne ka intazar karogi ye 😱"
+    },
+    {
+        q: "Laiba ne tumhara phone le liya 😏 tum kya karogi?",
+        o1: "tum use jail me dalwa dongi 😣",
+        o2: "gundon se marwao gi 😥"
+    },
+    {
+        q: "Laiba chocolate kha rahi hai aur tumhe nahi de rahi 😭",
+        o1: "uska sar phar dongi🥺",
+        o2: "uski chocatle me zahar mila dongi 🍫"
+    }
+];
+
+let index = 0;
+
+function startGame() {
+    game.innerHTML = `
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpJZ-l290aOgvu-jUS1x_ITRg5pyMxbye-zQ&s">
+        <h1>Let's Get Started 😈</h1>
+        <button class="start" onclick="showQuestion()">Start</button>
+    `;
+}
+
+function showQuestion() {
+    if (index < questions.length) {
+        game.innerHTML = `
+            <h1>${questions[index].q}</h1>
+            <button class="opt" onclick="lose()">${questions[index].o1}</button>
+            <button class="opt" onclick="lose()">${questions[index].o2}</button>
+            <div class="cry">😭</div>
+        `;
+        index++;
+    } else {
+        finalQuestion();
+    }
+}
+
+function lose() {
+    showQuestion();
+}
+
+function finalQuestion() {
+    game.innerHTML = `
+        <h1>
+            Tum ne Laiba ka bohot dil dukha diya hai 😢<br>
+            Ab tum Laiba ko cheez delaon gi?
+        </h1>
+        <button onclick="win()">Yes ❤️</button>
+        <button id="noBtn">No 😏</button>
+    `;
+
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+        noBtn.style.top = Math.random() * window.innerHeight + "px";
+        noBtn.style.left = Math.random() * window.innerWidth + "px";
+    });
+}
+
+function win() {
+    game.innerHTML = `
+        <img src="https://i.pinimg.com/originals/70/c1/41/70c141ffbfa1a913c5a30204d1ac9f15.gif">
+        <h1>Good Job 😍<br>Laiba khush ho gayi 💖</h1>
+    `;
+}
+
+startGame();
+
+</script>
+
+</body>
+</html>
+
